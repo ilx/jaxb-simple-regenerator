@@ -1,69 +1,69 @@
-<project>
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.jvnet.jaxb2_commons</groupId>
-    <artifactId>simple-regenerator</artifactId>
-    <packaging>jar</packaging>
-    <version>1.0</version>
-    <name>Simple regenerator XJC plugin</name>
-    <inceptionYear>2006</inceptionYear>
-    <url>https://jaxb2-commons.dev.java.net/</url>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.jvnet.jaxb2_commons</groupId>
+	<artifactId>simple-regenerator</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+	<name>Simple regenerator XJC plugin</name>
+	<inceptionYear>2006</inceptionYear>
+	<url>https://jaxb2-commons.dev.java.net/</url>
 
-    <description>
+	<description>
         Allow you to write add some code into the generated code, and have
         XJC preserve them.
     </description>
 
-    <organization>
-        <name>java.net</name>
-        <url>http://www.java.net/</url>
-    </organization>
+	<organization>
+		<name>java.net</name>
+		<url>http://www.java.net/</url>
+	</organization>
 
-    <licenses>
-        <license>
-            <name>MIT license</name>
-            <url>http://www.opensource.org/licenses/mit-license.html</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+	<licenses>
+		<license>
+			<name>MIT license</name>
+			<url>http://www.opensource.org/licenses/mit-license.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-xjc</artifactId>
-            <version>2.1-EA1</version>
-        </dependency>
-    </dependencies>
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	<dependencies>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-xjc</artifactId>
+			<version>2.2.6-b31</version>
+		</dependency>
+	</dependencies>
 
-    <developers>
-        <developer>
-            <id>juraj</id>
-            <name>Juraj Vitko</name>
-            <email>juraj.vitko@gmail.com</email>
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>Kohsuke Kawaguchi</name>
-            <id>kohsuke</id>
-            <email>kk@kohsuke.org</email>
-            <organization>Sun Microsystems</organization>
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </developer>
-    </developers>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<developers>
+		<developer>
+			<id>juraj</id>
+			<name>Juraj Vitko</name>
+			<email>juraj.vitko@gmail.com</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Kohsuke Kawaguchi</name>
+			<id>kohsuke</id>
+			<email>kk@kohsuke.org</email>
+			<organization>Sun Microsystems</organization>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
 </project>
