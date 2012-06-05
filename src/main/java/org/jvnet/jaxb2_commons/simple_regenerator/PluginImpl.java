@@ -18,7 +18,7 @@ import com.sun.tools.xjc.outline.Outline;
 
 /**
  * {@link Plugin} that preserves user written code using simple magic tags.
- * 
+ *
  * Limitations:<br>
  * - only a single preserved block per class<br>
  * - no support for nested classes<br>
@@ -27,7 +27,7 @@ import com.sun.tools.xjc.outline.Outline;
  * @author Juraj Vitko
  */
 public class PluginImpl extends Plugin {
-	
+
 	private Pattern magicPattern;
 	private final static String magicTag = "\n//--simple--preserve\n";
 
@@ -38,32 +38,32 @@ public class PluginImpl extends Plugin {
     public String getUsage() {
         return "  -simple-preserve    :  preserve user written code enclosed in \"'//--simple--preserve'\" comments.";
     }
-    
+
     public void onActivated(Options opts) throws BadCommandLineException {
     	magicPattern = Pattern.compile("\\r?\\n//--simple--preserve\\r?\\n");
     }
 
     public boolean run(Outline model, Options opt, ErrorHandler errorHandler) throws SAXException {
-    	
+
     	File javaFile = null;
     	try {
-    	
+
 	        for(ClassOutline co : model.getClasses()) {
 	        	javaFile = new File(opt.targetDir, co.target.fullName().replaceAll("\\.", "/") + ".java");
 
-	        	//System.out.println("simple_regenerator: [" 
+	        	//System.out.println("simple_regenerator: ["
 	        		//+ javaFile.getAbsolutePath() + "] " + (javaFile.canRead() ? "exists" : "non-existing"));
-	        	
+
 	        	if(!javaFile.canWrite())
 	        		continue;
-	        	
+
 	        	String preservedCode = getPreservedCode(javaFile);
 	        	if(preservedCode != null) {
 	        		System.out.println("simple_regenerator: preserved code in: [" + javaFile.getAbsolutePath() + "]");
 	        		co.implClass.direct(preservedCode);
 	        	}
 	        }
-	
+
 	        return true;
     	}
     	catch(Exception e) {
@@ -71,7 +71,7 @@ public class PluginImpl extends Plugin {
     		return false;
     	}
     }
-    
+
     protected String getPreservedCode(File f) throws Exception {
 		char arr[] = new char[(int) f.length()];
 		FileReader fr = new FileReader(f);
@@ -87,9 +87,16 @@ public class PluginImpl extends Plugin {
 		if(!magic.find())
 			return null;
 		int idx1 = magic.end();
-		if(!magic.find())
-			throw new Exception();
-		int idx2 = magic.start();
-		return magicTag + fc.substring(idx1, idx2) + magicTag;
+
+		String result = magicTag + "" + magicTag;
+		if(magic.find()) {
+			int idx2 = magic.start();
+			result = magicTag + fc.substring(idx1, idx2) + magicTag;
+		}
+		else {
+			System.out.println("simple_regenerator: No magic tag (simple-preserve) found in '" + f.getAbsolutePath() + "'.");
+		}
+
+		return result;
     }
 }
